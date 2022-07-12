@@ -60,12 +60,22 @@ RSpec.describe Item, type: :model do
       it '価格が半角数字でなければ登録できない' do
         @item.price = "３００"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
+        expect(@item.errors.full_messages).to include("Price is invalid. Half-width number")
       end
-      it '価格が¥300~¥9,999,999でなければ登録できない' do
+      it '価格が¥300以下であると登録できない' do
         @item.price = "299"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+      it '価格が¥9,999,999以上であると登録できない' do
+        @item.price = "10000000"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end 
