@@ -33,6 +33,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+    end
+  end
+
   private
 
   def item_params_id
