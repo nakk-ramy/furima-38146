@@ -8,7 +8,6 @@ class MemoriesController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_memory = OrderMemory.new(memory_params)
     if @order_memory.valid?
       pay_item
@@ -28,7 +27,6 @@ class MemoriesController < ApplicationController
   end
 
   def pay_item
-    @item = Item.find(params[:item_id])
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item[:price],
