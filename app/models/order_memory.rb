@@ -1,12 +1,11 @@
 class OrderMemory
   include ActiveModel::Model
   attr_accessor :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :memory_id, :user_id, :item_id, :token
-
-  validates :memory_id, :user_id, :item_id, :token, presence: true
+with_options presence: true do
+  validates :memory_id, :user_id, :item_id, :token, :city, :addresses
+end
   validates :postal_code, { format: /\A\d{3}-\d{4}\z/ }
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :city, presence: true
-  validates :addresses, presence: true
+  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" } 
   validates :phone_number, { format: /\A\d{10}$|^\d{11}\z/ }
 
   def save

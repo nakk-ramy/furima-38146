@@ -2,8 +2,6 @@ class MemoriesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
   def index
-    @memories = Memory.all
-    @item = Item.find(params[:item_id])
     @order_memory = OrderMemory.new
   end
 
