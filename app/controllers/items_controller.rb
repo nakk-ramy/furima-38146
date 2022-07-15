@@ -49,8 +49,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    if current_user != @item.user || @item.memory != nil
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user != @item.user || !@item.memory.nil?
   end
 end
