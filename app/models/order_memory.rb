@@ -4,7 +4,7 @@ class OrderMemory
 with_options presence: true do
   validates :user_id, :item_id, :token, :city, :addresses
   validates :postal_code, { format: /\A\d{3}-\d{4}\z/ }
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :prefecture_id, numericality: { other_than: 1 } 
   validates :phone_number, { format: /\A\d{10}$|^\d{11}\z/ }
 end
 
